@@ -1,75 +1,51 @@
 <template>
-    <header>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">HTML</a></li>
-            <li><a href="#">CSS</a></li>
-            <ul style="float:right; list-style-type:none;">
-                <li><a @click="fnminimizing">─</a></li>
-                 <li><a @click="fnunmaximizing">ㅁ</a></li>
-                <li><a @click="fnmaximizing">ㅁ</a></li>
-                <li><a @click="fnclose">Ⅹ</a></li>
-            </ul>
-        </ul>
-    </header>
+  <header>
+  <b-navbar toggleable="md" type="dark" variant="info">
+    <b-navbar-brand href="#">로고</b-navbar-brand>
+    <b-collapse is-nav id="nav_collapse">
+      <!-- Right aligned nav items -->
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item href="#" @click="fnminimizing">축소</b-nav-item>
+        <b-nav-item href="#" @click="fnmaximizing">확대</b-nav-item>
+        <b-nav-item href="#" @click="fnclose">닫기</b-nav-item>
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
+  </header>
 </template>
 
 <script>
 export default {
   name: 'top-menu',
+  data () {
+    return {
+      curwin: this.$electron.remote.getCurrentWindow()
+    }
+  },
   methods: {
     fnmaximizing () {
-      let win = this.$electron.remote.getCurrentWindow()
-      win.maximize()
+      this.curwin.maximize()
     },
     fnunmaximizing () {
-      let win = this.$electron.remote.getCurrentWindow()
-      win.unmaximize()
+      this.curwin.unmaximize()
     },
     fnminimizing () {
-      let win = this.$electron.remote.getCurrentWindow()
-      win.minimize()
+      this.curwin.minimize()
     },
     fnclose () {
-      let win = this.$electron.remote.getCurrentWindow()
-      win.close()
+      this.curwin.close()
     }
   }
 }
 </script>
 
 <style scoped>
-    header {
-      -webkit-app-region: drag;
-    }
-    ul {
-        background:
-        radial-gradient(
-        ellipse at top left,
-        rgba(60, 179, 113, 1) 40%,
-        rgba(60, 179, 113, .9) 100%
-        );
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-    }
-    li { float: left; }
-    li a {
-        display: block;
-        color: #000000;
-        padding: 8px;
-        text-decoration: none;
-        text-align: center;
-        font-weight: bold;
-        -webkit-app-region: no-drag;
-        cursor: pointer;
-    }
-    li a.current {
-        background: white;
-    }
-    li a:hover:not(.current) {
-        background: white;
-    }
+  header {
+    -webkit-app-region: drag;
+  }
+  a.nav-link {
+    -webkit-app-region: no-drag;
+    color: white!important
+  }
 </style>
 
