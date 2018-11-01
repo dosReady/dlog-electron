@@ -1,25 +1,20 @@
 <template>
-  <div id="app" class="container">
-    <div class="row">
-      <!-- <top-menu></top-menu> -->
-      <div id="side-menu-div" class="col">
+  <div id="app" class="row">
+      <div id="side-menu-div" class="col-3 bg-blue-grey-700">
         <side-menu></side-menu>
       </div>
-      <div id="content" class="col">
+      <div id="content" class="col-9 px-0">
         <router-view></router-view>
       </div>
-    </div>
   </div>
 </template>
 
 <script>
-// import TopMenu from '@/components/CommonPage/TopMenu'
 import SideMenu from '@/components/CommonPage/SideMenu'
 export default {
   name: 'dlog',
   components: {
     SideMenu
-    // TopMenu
   }
 }
 </script>
@@ -28,19 +23,20 @@ export default {
 ::-webkit-scrollbar {
   display: none;
 }
-div.container {
-  margin: 0;
-  padding: 0;
+
+body {
+  -webkit-app-region: drag
 }
-div.content {
-  margin: 0;
-  padding: 0;
-  width: 100%!important;
-  background: rgba(249,247,232,1)
+.wrapper {
+  height: 100vh;
+  padding: 60px 80px;
+  width: 100vw;
 }
-div.side-menu-div {
-  margin: 0;
-  padding: 0;
-  width: 100%!important;
+
+.bg-blue-grey-700 {
+  height: 100vh;
+  width: 20vh!important;
+  background-color: #37474f!important
 }
+
 </style>

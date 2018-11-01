@@ -1,9 +1,9 @@
 <template>
-  <b-nav vertical id="side-menu">
-    <b-nav-item>주간업무보고서 작성</b-nav-item>
-    <b-nav-item>기능 구상중..</b-nav-item>
-    <b-nav-item>기능 구상중..</b-nav-item>
-  </b-nav>
+ <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <router-link class="nav-link text-white" to="/">Home</router-link>
+      <router-link class="nav-link text-white" to="/word">Word</router-link>
+      <router-link class="nav-link text-white" to="/word">...</router-link>
+  </div>
 </template>
 
 <script>
@@ -20,16 +20,8 @@ export default {
 </script>
 
 <style scoped>
-  #side-menu {
-    background: rgba(22, 124, 128, 1);
-    padding-top: 10px;
-    width: 100vw;
-  }
-  #side-menu > li > a {
-    color: white
-  }
-  #side-menu > li > a:hover {
-    background: rgb(77, 126, 128)
-  }
+ a.nav-link:hover {
+   background-color: #454e53!important
+ }
 </style>
 

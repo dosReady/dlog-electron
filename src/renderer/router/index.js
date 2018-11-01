@@ -11,6 +11,11 @@ export default new Router({
       component: require('@/components/LandingPage').default
     },
     {
+      path: '/word',
+      name: 'word-main',
+      component: require('@/components/WordPage/WordMain').default
+    },
+    {
       path: '*',
       redirect: '/'
     }

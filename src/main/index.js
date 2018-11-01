@@ -22,7 +22,7 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     height: 700,
     useContentSize: true,
-    width: 577
+    width: 1000
     // frame: false,
   })
   mainWindow.toggleDevTools()
