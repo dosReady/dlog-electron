@@ -165,8 +165,18 @@ if (process.env.NODE_ENV === 'production') {
     new BabiliWebpackPlugin(),
     new CopyWebpackPlugin([
       {
-        from: path.join(__dirname, '../static'),
+        from: path.join(__dirname, '../src/renderer/static'),
         to: path.join(__dirname, '../dist/electron/static'),
+        ignore: ['.*']
+      },
+      {
+        from: path.join(__dirname, '../src/template'),
+        to: path.join(__dirname, '../dist/electron/template'),
+        ignore: ['.*']
+      },
+      {
+        from: path.join(__dirname, '../src/python'),
+        to: path.join(__dirname, '../dist/electron/python'),
         ignore: ['.*']
       }
     ]),

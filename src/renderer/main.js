@@ -13,8 +13,13 @@ if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
 Vue.PythonShell = Vue.prototype.$PythonShell = PythonShell
+Vue.ChildProcess = Vue.prototype.$ChildProcess = require('child_process')
 
-const pathval = path.join(process.cwd(), '/src/python')
+alert(process.env.NODE_ENV)
+let pathval = path.join(__dirname, './python')
+if (process.env.NODE_ENV !== 'production') {
+  pathval = path.join(process.cwd(), './src/python')
+}
 Vue.pypath = Vue.prototype.$pypath = pathval
 
 /* eslint-disable no-new */

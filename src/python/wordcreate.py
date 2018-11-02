@@ -1,3 +1,5 @@
+# pip install python-docx
+# pip install docx-mailmerge
 from docx import Document
 from mailmerge import MailMerge
 
@@ -43,11 +45,12 @@ def wordcreate():
     # Automatically page break 
     document.add_page_break() 
     # Saving 
-    document.save('E:\\temp\\name.docx')
+    document.save('D:\\DEVDIR\\temp\\name.docx')
 def mailmerge():
-    document = MailMerge('E:\\temp\\name.docx')
-    document.merge(제목='테스트')
-    document.write('E:\\temp\\name_output.docx')
+    document = MailMerge('D:\\DEVDIR\\temp\\name.docx')
+    document.merge(제목='집왔다')
+    document.write('D:\\DEVDIR\\temp\\name_output.docx')
+def test():
+    print("TEST")
 
-if __name__ == '__main__':
-    mailmerge()
+test()

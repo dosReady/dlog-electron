@@ -3,11 +3,11 @@
         <div class="row mb-2">
           <h1>Word</h1>
           <div class="btn-group ml-1">
-            <button type="button" class="btn btn-floating btn-danger mr-2" @click="fnadd"><img class="icon" src="/static/icons/add.png"></button>
-            <button type="button" class="btn btn-floating btn-success" @click="fnexport"><img class="icon" src="/static/icons/upload-arrow.png"></button>
+            <button type="button" class="btn btn-floating btn-danger mr-2" @click="fnadd"><img class="icon" :src="icon.add"></button>
+            <button type="button" class="btn btn-floating btn-success" @click="fnexport"><img class="icon" :src="icon.upload_arrow"></button>
           </div>
         </div>
-        <shadowbox :items="worditems" ></shadowbox>
+        <shadowbox :items="worditems" ></shadowbox> 
     </div>
 </template>
 
@@ -17,7 +17,11 @@ export default {
   name: 'word-mainpage',
   data () {
     return {
-      worditems: []
+      worditems: [],
+      icon: {
+        add: require('@/static/icons/add.png'),
+        upload_arrow: require('@/static/icons/upload-arrow.png')
+      }
     }
   },
   components: {
@@ -28,14 +32,9 @@ export default {
       this.worditems.push({})
     },
     fnexport () {
-      let options = {
-        mode: 'text',
-        pythonOptions: ['-u'],
-        scriptPath: this.$pypath
-      }
-      this.$PythonShell.run('wordcreate.py', options, function (err, result) {
-        if (err) throw err
-        alert(result)
+      this.$ChildProcess.execFile(`${this.$pypath}\\wordcreate.exe`, null, null, (error, stdout, stderr) => {
+        if (error) throw error
+        console.log(stdout)
       })
     }
   }
