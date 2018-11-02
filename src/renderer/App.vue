@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import SideMenu from '@/components/CommonPage/SideMenu'
+import SideMenu from '@/pages/CommonPage/SideMenu'
 export default {
   name: 'dlog',
   components: {

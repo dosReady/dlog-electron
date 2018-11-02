@@ -8,12 +8,12 @@ export default new Router({
     {
       path: '/',
       name: 'landing-page',
-      component: require('@/components/LandingPage').default
+      component: require('@/pages/LandingPage').default
     },
     {
       path: '/word',
       name: 'word-main',
-      component: require('@/components/WordPage/WordMain').default
+      component: require('@/pages/WordPage/WordMainPage').default
     },
     {
       path: '*',
