@@ -4,17 +4,27 @@
         <side-menu></side-menu>
       </div>
       <div id="content" class="col-9 px-0">
-        <router-view></router-view>
+        <scrolly class="foo" :style="{ width: '75.3vw', height: '98vh' }">
+          <scrolly-viewport>
+            <!-- Your contents here -->
+            <router-view></router-view>
+          </scrolly-viewport>
+          <scrolly-bar axis="y"></scrolly-bar>
+        </scrolly>
       </div>
   </div>
 </template>
 
 <script>
+import { Scrolly, ScrollyViewport, ScrollyBar } from 'vue-scrolly'
 import SideMenu from '@/pages/CommonPage/SideMenu'
 export default {
   name: 'dlog',
   components: {
-    SideMenu
+    SideMenu,
+    Scrolly,
+    ScrollyViewport,
+    ScrollyBar
   }
 }
 </script>
@@ -25,12 +35,13 @@ export default {
 }
 
 body {
-  -webkit-app-region: drag
+  -webkit-app-region: drag;
+  background-color: #97a3aa!important
 }
 .wrapper {
-  height: 100vh;
-  padding: 60px 80px;
-  width: 100vw;
+  padding: 50px 50px;
+  height: 600px;
+  width: 1000px;
 }
 
 .bg-blue-grey-700 {
