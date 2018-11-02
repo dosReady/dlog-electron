@@ -3,7 +3,8 @@
         <div class="row mb-2">
           <h1>Word</h1>
           <div class="btn-group ml-1">
-            <button type="button" class="btn btn-floating btn-danger" @click="fnadd"><img class="icon" src="/static/icons/add.png"></button>
+            <button type="button" class="btn btn-floating btn-danger mr-2" @click="fnadd"><img class="icon" src="/static/icons/add.png"></button>
+            <button type="button" class="btn btn-floating btn-success" @click="fnadd"><img class="icon" src="/static/icons/upload-arrow.png"></button>
           </div>
         </div>
         <shadowbox :items="worditems" ></shadowbox>

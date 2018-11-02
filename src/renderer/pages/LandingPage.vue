@@ -7,7 +7,11 @@
 <script>
 export default {
   name: 'landing-page',
-  methods: {
+  created () {
+    this.$PythonShell.runString('x=1+1;print(x)', null, function (err, results) {
+      if (err) throw err
+      alert(results)
+    })
   }
 }
 </script>
