@@ -16,6 +16,11 @@ export default new Router({
       component: require('@/pages/WordPage/WordMainPage').default
     },
     {
+      path: '/options',
+      name: 'option-main',
+      component: require('@/pages/CommonPage/OptionPage').default
+    },
+    {
       path: '*',
       redirect: '/'
     }

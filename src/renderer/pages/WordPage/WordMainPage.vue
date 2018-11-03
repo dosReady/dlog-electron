@@ -31,21 +31,15 @@ export default {
     fnadd () {
       this.worditems.push({})
     },
-    fnexport () {
-      this.$ChildProcess.execFile(`${this.$pypath}\\wordcreate.exe`, null, null, (error, stdout, stderr) => {
-        if (error) throw error
-        console.log(stdout)
-      })
+    async fnexport () {
+      const val = await this.$pyrouterFn('wordcreate')
+      console.log(val)
     }
   }
 }
 </script>
 
 <style scoped>
-  img.icon {
-    width: 30px;
-    height: auto;
-  }
 </style>
 
 

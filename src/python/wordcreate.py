@@ -1,7 +1,13 @@
 # pip install python-docx
 # pip install docx-mailmerge
+import os
+import sys
 from docx import Document
 from mailmerge import MailMerge
+__dirname__ = os.path.dirname(os.path.realpath(__file__))
+__parentdir__ = os.path.abspath(os.path.join(__dirname__, '..'))
+appdir = f'{__dirname__}\\resources\\app.asar'
+templatedir = f'{appdir}\\dist\\electron\\template'
 
 def wordcreate():
     # 문서를 선언 
@@ -46,11 +52,35 @@ def wordcreate():
     document.add_page_break() 
     # Saving 
     document.save('D:\\DEVDIR\\temp\\name.docx')
+    
 def mailmerge():
-    document = MailMerge('D:\\DEVDIR\\temp\\name.docx')
-    document.merge(제목='집왔다')
-    document.write('D:\\DEVDIR\\temp\\name_output.docx')
-def test():
-    print("TEST")
+    templatefile = None
+    outputfile = None
+    tempdir = os.path.abspath(os.path.join(__parentdir__, '..')) + '\\temp'
 
-test()
+    if(sys.argv[0].find('.exe') == -1):
+        templatefile = f'{templatedir}\\word\\name.docx'
+        outputfile = f'{tempdir}\\word\\name_output.docx'
+    else:
+        templatefile = f'{__parentdir__}\\template\\word\\name.docx'
+        outputfile = f'{tempdir}\\word\\name_output.docx'
+
+    document = MailMerge(templatefile)
+    document.merge(제목='아침')
+    document.write(outputfile)
+
+def test():
+    print(__dirname__)
+    print(__parentdir__)
+    print(os.path.realpath(__file__))
+
+def info():
+    infodict = {
+        '__dirname__': __dirname__,
+        '__parentdir__': __parentdir__,
+        'realpath': os.path.realpath(__file__)
+    }
+    print(infodict)
+
+if __name__ == '__main__':
+    mailmerge()

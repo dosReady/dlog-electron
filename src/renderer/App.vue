@@ -33,6 +33,10 @@ export default {
 ::-webkit-scrollbar {
   display: none;
 }
+img.icon {
+  width: 30px;
+  height: auto;
+}
 
 body {
   -webkit-app-region: drag;
