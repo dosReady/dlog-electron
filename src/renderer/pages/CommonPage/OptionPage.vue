@@ -12,21 +12,21 @@
       <div class="form-group">
           <label for="">Template directory</label>
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Template directory" v-model="options.tempdir" readonly>
+            <span class="form-control">{{this.options.tempdir}}</span>
             <div class="input-group-prepend">
               <button class="btn btn-outline-info" @click="$refs.gettempdir.click()">찾기</button>
             </div>
-            <input type="file" class="form-control" style="display:none" ref="gettempdir" @change="getdir($event, 'temp')"  webkitdirectory directory multiple/>
+            <input type="file" class="form-control" style="display:none" ref="gettempdir" @change="getdir" id="tempdir"  webkitdirectory directory multiple/>
           </div>
       </div>
       <div class="form-group">
           <label for="">Export Directory</label>
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Export Directory" v-model="options.exportdir" readonly>
+            <span class="form-control">{{this.options.exportdir}}</span>
             <div class="input-group-append">
               <button class="btn btn-outline-info" @click="$refs.getexportdir.click()">찾기</button>
             </div>
-            <input type="file" class="form-control" style="display:none" ref="getexportdir" @change="getdir($event, 'export')"  webkitdirectory directory multiple/>
+            <input type="file" class="form-control" style="display:none" ref="getexportdir" @change="getdir" id="exportdir"  webkitdirectory directory multiple/>
           </div>
       </div>
     </div>
@@ -58,13 +58,12 @@ export default {
     try {
       console.log(this.json.file)
       fs.accessSync(this.json.file, fs.constants.F_OK)
+      const data = fs.readFileSync(this.json.file, 'utf8')
+      this.options = JSON.parse(data)
     } catch (error) {
       console.log('no such dir')
       fs.mkdirSync(this.json.dir)
-      fs.writeFileSync(this.json.file, '{}', 'utf8')
-    } finally {
-      const data = fs.readFileSync(this.json.file, 'utf8')
-      this.options = JSON.parse(data)
+      fs.writeFileSync(this.json.file, JSON.stringify({}), 'utf8')
     }
   },
   methods: {
@@ -79,10 +78,12 @@ export default {
         fs.writeFileSync(this.json.file, JSON.stringify(this.options), 'utf8')
       }
     },
-    getdir: function (e, mode) {
-      if (mode === 'temp') {
+    getdir: function (e) {
+      console.log(e)
+      console.log(this)
+      if (e.target.id === 'tempdir') {
         this.options.tempdir = e.target.files[0].path
-      } else if (mode === 'export') {
+      } else if (e.target.id === 'exportdir') {
         this.options.exportdir = e.target.files[0].path
       }
     }
