@@ -10,6 +10,7 @@
             <router-view></router-view>
           </scrolly-viewport>
           <scrolly-bar axis="y"></scrolly-bar>
+          <scrolly-bar axis="x"></scrolly-bar>
         </scrolly>
       </div>
   </div>

@@ -16,10 +16,12 @@ Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
 // My Code
-let curdirname = __dirname
+let curdirname = path.join(__dirname, '../../../../')
 if (process.env.NODE_ENV !== 'production') {
-  curdirname = path.join(process.cwd(), './src')
+  curdirname = path.join(process.cwd(), './src/')
 }
+console.log('Electron Path: ' + curdirname)
+
 const execFile = util.promisify(ChildProcess.execFile)
 Vue.prototype.$PythonShell = PythonShell
 Vue.prototype.$ChildProcess = ChildProcess
@@ -31,13 +33,13 @@ Vue.pyrouterFn = Vue.prototype.$pyrouterFn = async function (pyfile, args) {
     pathval = path.join(process.cwd(), './src/python')
   }
   if (process.env.NODE_ENV === 'production') {
-    const {stdout, stderr} = await execFile(`${pathval}\\${pyfile}.exe`, [args])
+    const {stdout, stderr} = await execFile(`${pathval}\\${pyfile}.exe`, ['production', args])
     if (stderr) throw stderr
     let obj = JSON.parse(stdout)
     obj.argv.splice(0, 1)
     return obj
   } else {
-    const {stdout, stderr} = await execFile('python', [`${pathval}\\${pyfile}.py`, args])
+    const {stdout, stderr} = await execFile('python', [`${pathval}\\${pyfile}.py`, 'development', args])
     if (stderr) throw stderr
     let obj = JSON.parse(stdout)
     obj.argv.splice(0, 1)

@@ -13,6 +13,7 @@
 
 <script>
 import Shadowbox from '@/components/word/Shadowbox'
+
 export default {
   name: 'word-mainpage',
   data () {

@@ -11,11 +11,23 @@
     <div class="shadow p-3 mb-5 bg-white rounded">
       <div class="form-group">
           <label for="">Template directory</label>
-          <input type="text" class="form-control" placeholder="Template directory" v-model="options.tempdir">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Template directory" v-model="options.tempdir" readonly>
+            <div class="input-group-prepend">
+              <button class="btn btn-outline-info" @click="$refs.gettempdir.click()">찾기</button>
+            </div>
+            <input type="file" class="form-control" style="display:none" ref="gettempdir" @change="getdir($event, 'temp')"  webkitdirectory directory multiple/>
+          </div>
       </div>
       <div class="form-group">
           <label for="">Export Directory</label>
-          <input type="text" class="form-control" placeholder="Export Directory" v-model="options.exportdir">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Export Directory" v-model="options.exportdir" readonly>
+            <div class="input-group-append">
+              <button class="btn btn-outline-info" @click="$refs.getexportdir.click()">찾기</button>
+            </div>
+            <input type="file" class="form-control" style="display:none" ref="getexportdir" @change="getdir($event, 'export')"  webkitdirectory directory multiple/>
+          </div>
       </div>
     </div>
     
@@ -30,8 +42,8 @@ export default {
   data () {
     return {
       json: {
-        file: `${this.$curdirname}/conf/options.json`,
-        dir: `${this.$curdirname}/conf`
+        file: `${this.$curdirname}conf\\options.json`,
+        dir: `${this.$curdirname}conf`
       },
       icon: {
         add: require('@/static/icons/add.png')
@@ -49,7 +61,7 @@ export default {
     } catch (error) {
       console.log('no such dir')
       fs.mkdirSync(this.json.dir)
-      fs.writeFileSync(this.json.file, null, 'utf8')
+      fs.writeFileSync(this.json.file, '{}', 'utf8')
     } finally {
       const data = fs.readFileSync(this.json.file, 'utf8')
       this.options = JSON.parse(data)
@@ -62,9 +74,16 @@ export default {
         fs.accessSync(this.json.file, fs.constants.F_OK)
       } catch (error) {
         console.log('no such dir')
-        fs.mkdirSync(`${this.$curdirname}/conf`)
+        fs.mkdirSync(this.json.dir)
       } finally {
         fs.writeFileSync(this.json.file, JSON.stringify(this.options), 'utf8')
+      }
+    },
+    getdir: function (e, mode) {
+      if (mode === 'temp') {
+        this.options.tempdir = e.target.files[0].path
+      } else if (mode === 'export') {
+        this.options.exportdir = e.target.files[0].path
       }
     }
   }
