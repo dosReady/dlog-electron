@@ -16,16 +16,20 @@ Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
 // My Code
-const execFile = util.promisify(ChildProcess.execFile)
-let pathval = path.join(__dirname, './python')
+let curdirname = __dirname
 if (process.env.NODE_ENV !== 'production') {
-  pathval = path.join(process.cwd(), './src/python')
+  curdirname = path.join(process.cwd(), './src')
 }
-Vue.pypath = Vue.prototype.$pypath = pathval
-Vue.PythonShell = Vue.prototype.$PythonShell = PythonShell
-Vue.ChildProcess = Vue.prototype.$ChildProcess = ChildProcess
+const execFile = util.promisify(ChildProcess.execFile)
+Vue.prototype.$PythonShell = PythonShell
+Vue.prototype.$ChildProcess = ChildProcess
+Vue.prototype.$curdirname = curdirname
 
 Vue.pyrouterFn = Vue.prototype.$pyrouterFn = async function (pyfile, args) {
+  let pathval = path.join(__dirname, './python')
+  if (process.env.NODE_ENV !== 'production') {
+    pathval = path.join(process.cwd(), './src/python')
+  }
   if (process.env.NODE_ENV === 'production') {
     const {stdout, stderr} = await execFile(`${pathval}\\${pyfile}.exe`, [args])
     if (stderr) throw stderr
