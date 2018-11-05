@@ -1,7 +1,7 @@
 <template>
  <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
       <router-link class="nav-link text-white" to="/">Home</router-link>
-      <router-link class="nav-link text-white" to="/word">Word</router-link>
+      <router-link class="nav-link text-white" to="/nwmonitor">Network Monitor</router-link>
       <router-link class="nav-link text-white" to="/options">설정</router-link>
   </div>
 </template>

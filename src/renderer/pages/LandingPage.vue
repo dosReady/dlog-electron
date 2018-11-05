@@ -16,7 +16,13 @@ export default {
     }
   },
   async created () {
-    this.statusinfo = await this.$pyrouterFn('dloginfo', JSON.stringify({dos: 'dos'}))
+    const args = {
+      'module': 'module.dloginfo',
+      'type': 'fn',
+      'fn': 'info',
+      'args': 'none'
+    }
+    this.statusinfo = await this.$pyrouterFn('main', JSON.stringify(args))
     console.log(this.statusinfo)
   }
 }

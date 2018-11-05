@@ -11,9 +11,9 @@ export default new Router({
       component: require('@/pages/LandingPage').default
     },
     {
-      path: '/word',
-      name: 'word-main',
-      component: require('@/pages/WordPage/WordMainPage').default
+      path: '/nwmonitor',
+      name: 'newmonitor-main',
+      component: require('@/pages/ContentsPage/NwMonitorPage').default
     },
     {
       path: '/options',
